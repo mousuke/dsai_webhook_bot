@@ -6,7 +6,7 @@ import joblib
 from groq import Groq
 
 import os
-os.environ['GROQ_API_KEY'] = ""
+os.environ['GROQ_API_KEY'] = os.getenv("groq")
 # for cloud ..........
 
 app = Flask(__name__)
