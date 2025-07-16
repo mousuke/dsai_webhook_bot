@@ -122,6 +122,16 @@ def webhook():
         })
     return('ok', 200)
 
+@app.route("/stop_telegram",methods=["GET","POST"])
+def stop_telegram():
+    # The following line is used to delete the existing webhook URL for the Telegram bot
+    delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
+    requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
+
+    status = "Webhook for Telegram bot stopped."
+
+    return(render_template("telegram.html", status=status))
+
 @app.route("/dbs",methods=["GET","POST"])
 def dbs():
     return(render_template("dbs.html"))
