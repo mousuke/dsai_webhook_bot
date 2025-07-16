@@ -104,7 +104,7 @@ def webhook():
         # Pass the query to the Groq model
         client = Groq()
         completion_ds = client.chat.completions.create(
-            model="deepseek-r1-distill-llama-70b",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {
                     "role": "user",
@@ -128,7 +128,11 @@ def stop_telegram():
     delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
     requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
 
-    status = "Webhook for Telegram bot stopped."
+    if webhook_response.status_code == 200:
+        # set status message
+        status = "Webhook for Telegram bot stopped."
+    else:
+        status = "Failed to stop the telegram bot. Please check the logs."
 
     return(render_template("telegram.html", status=status))
 
