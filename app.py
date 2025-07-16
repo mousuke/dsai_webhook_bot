@@ -7,6 +7,17 @@ from groq import Groq
 import requests
 
 import os
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+if not TELEGRAM_BOT_TOKEN:
+    raise ValueError("TELEGRAM_BOT_TOKEN environment variable is required")
+
+domain_url = os.getenv('domainforT')
+if not domain_url:
+    raise ValueError("domain_url environment variable is required")
+
+
+
 # os.environ['GROQ_API_KEY'] = os.getenv("groq")
 # for cloud ..........
 
@@ -64,8 +75,6 @@ def deepseek_reply():
 
 @app.route("/telegram",methods=["GET","POST"])
 def telegram():
-    domain_url = os.getenv('domainforT')
-
     # The following line is used to delete the existing webhook URL for the Telegram bot
     delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
     requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
