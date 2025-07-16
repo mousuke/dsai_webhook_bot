@@ -64,7 +64,7 @@ def deepseek_reply():
 
 @app.route("/telegram",methods=["GET","POST"])
 def telegram():
-    domain_url = os.getenv(domainforT)
+    domain_url = os.getenv('domainforT')
 
     # The following line is used to delete the existing webhook URL for the Telegram bot
     delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
@@ -112,7 +112,7 @@ def webhook():
             "text": response_message
         })
     return('ok', 200)
-    
+
 @app.route("/dbs",methods=["GET","POST"])
 def dbs():
     return(render_template("dbs.html"))
