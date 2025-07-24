@@ -151,12 +151,16 @@ def prediction():
     return(render_template("prediction.html",r=pred))
 
 @app.route("/user_logs",methods=["GET","POST"])
-def deepseek():
+def user_logs():
     return(render_template("user_logs.html"))
 
 @app.route("/delete_logs",methods=["GET","POST"])
-def deepseek():
+def delete_logs():
     return(render_template("delete_logs.html"))
+
+@app.route("/sepia",methods=["GET","POST"])
+def sepia():
+    return(render_template("sepia.html"))
 
 
 if __name__ == "__main__":
