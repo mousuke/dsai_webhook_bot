@@ -31,6 +31,7 @@ def index():
 def main():
     q = request.form.get("q")
     # db
+
     return(render_template("main.html"))
 
 @app.route("/llama",methods=["GET","POST"])
@@ -148,6 +149,15 @@ def prediction():
     # make prediction
     pred = model.predict([[q]])
     return(render_template("prediction.html",r=pred))
+
+@app.route("/user_logs",methods=["GET","POST"])
+def deepseek():
+    return(render_template("user_logs.html"))
+
+@app.route("/delete_logs",methods=["GET","POST"])
+def deepseek():
+    return(render_template("delete_logs.html"))
+
 
 if __name__ == "__main__":
     app.run()
